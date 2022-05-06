@@ -13,6 +13,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.Objects;
 import java.util.Properties;
 
 
@@ -28,7 +29,7 @@ public class AppConfig {
    @Bean
    public DataSource getDataSource() {
       DriverManagerDataSource dataSource = new DriverManagerDataSource();
-      dataSource.setDriverClassName(env.getProperty("org.postgresql.Driver"));
+      dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("org.postgresql.Driver")));
       dataSource.setUrl(env.getProperty("jdbc:postgresql://localhost:5432/postgres"));
       dataSource.setUsername(env.getProperty("postgres"));
       dataSource.setPassword(env.getProperty("admin"));
